@@ -59,7 +59,7 @@ RUN curl -s https://dl.google.com/android/repository/sdk-tools-linux-${SDK_TOOLS
     rm -v /tools.zip
 
 # Copy pkg.txt to sdk folder and create repositories.cfg
-ADD pkg.txt /sdk
+ADD packages.txt /sdk
 RUN mkdir -p /root/.android && touch /root/.android/repositories.cfg
 
 RUN mkdir -p $ANDROID_HOME/licenses/ \
