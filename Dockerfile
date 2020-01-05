@@ -43,10 +43,10 @@ RUN apt-get install -qqy --no-install-recommends \
 
 # set noninteractive installation
 ENV DEBIAN_FRONTEND=noninteractive
-#install tzdata package
-RUN apt-get -y install tzdata
 # set your timezone
 RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
+#install tzdata package
+RUN apt-get -y install tzdata
 RUN dpkg-reconfigure --frontend noninteractive tzdata
 
 # pre-configure some ssl certs
