@@ -42,9 +42,9 @@ RUN apt-get install -qqy --no-install-recommends \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # set noninteractive installation
-RUN export DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 #install tzdata package
-RUN apt-get install -y tzdata
+RUN apt-get -y install tzdata
 # set your timezone
 RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
 RUN dpkg-reconfigure --frontend noninteractive tzdata
