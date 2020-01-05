@@ -22,7 +22,7 @@ ENV LANG en_US.UTF-8
 # install necessary packages
 # prevent installation of openjdk-11-jre-headless with a trailing minus,
 # as openjdk-8-jdk can provide all requirements and will be used anyway
-RUN apt-get install -qqy --no-install-recommends \
+RUN apt-get update && apt-get install -qqy --no-install-recommends \
     apt-utils \
     openjdk-8-jdk \
     checkstyle \
@@ -39,7 +39,10 @@ RUN apt-get install -qqy --no-install-recommends \
     git \
     ninja-build \
     build-essential \
-  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    tzdata \
+  && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+ENV TZ Amerika/New_York
 
 # pre-configure some ssl certs
 RUN rm -f /etc/ssl/certs/java/cacerts; \
