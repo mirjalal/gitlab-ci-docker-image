@@ -19,6 +19,11 @@ RUN apt-get -qq update && apt-get install -y locales \
 	&& localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 ENV LANG en_US.UTF-8
 
+# set noninteractive installation
+ENV DEBIAN_FRONTEND=noninteractive
+# set your timezone
+RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
+
 # install necessary packages
 # prevent installation of openjdk-11-jre-headless with a trailing minus,
 # as openjdk-8-jdk can provide all requirements and will be used anyway
@@ -39,14 +44,8 @@ RUN apt-get install -qqy --no-install-recommends \
     git \
     ninja-build \
     build-essential \
-  && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+  && apt-get install -y tzdata && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# set noninteractive installation
-ENV DEBIAN_FRONTEND=noninteractive
-# set your timezone
-RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
-#install tzdata package
-RUN apt-get install -y tzdata
 RUN dpkg-reconfigure --frontend noninteractive tzdata
 
 # pre-configure some ssl certs
