@@ -46,7 +46,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # set your timezone
 RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
 #install tzdata package
-RUN apt-get -y install tzdata
+RUN apt-get install -y tzdata
 RUN dpkg-reconfigure --frontend noninteractive tzdata
 
 # pre-configure some ssl certs
