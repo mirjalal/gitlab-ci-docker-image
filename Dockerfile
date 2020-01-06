@@ -44,9 +44,12 @@ RUN apt-get install -qqy --no-install-recommends \
     git \
     ninja-build \
     build-essential \
+    qemu-kvm \
   && apt-get install -y tzdata && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN dpkg-reconfigure --frontend noninteractive tzdata
+
+RUN adduser $USER kvm
 
 # pre-configure some ssl certs
 RUN rm -f /etc/ssl/certs/java/cacerts; \
