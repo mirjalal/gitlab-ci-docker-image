@@ -24,6 +24,17 @@ ENV DEBIAN_FRONTEND=noninteractive
 # set your timezone
 RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
 
+# Check that your CPU supports hardware virtualization
+RUN egrep -c '(vmx|svm)' /proc/cpuinfo
+
+# By default, if OS booted into XEN kernel it will not display 
+# svm or vmx flag using the grep command. 
+# To see if it is enabled or not from xen run following:
+RUN cat /sys/hypervisor/properties/capabilities
+
+# To see if the processor is 64-bit, you can run this command:
+RUN egrep -c ' lm ' /proc/cpuinfo
+
 # install necessary packages
 # prevent installation of openjdk-11-jre-headless with a trailing minus,
 # as openjdk-8-jdk can provide all requirements and will be used anyway
