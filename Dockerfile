@@ -44,7 +44,11 @@ RUN apt-get install -qqy --no-install-recommends \
     git \
     ninja-build \
     build-essential \
-    qemu-kvm \
+    qemu-kvm \\
+    libvirt-bin \\
+    ubuntu-vm-builder \\
+    bridge-utils \\
+    ia32-libs-multiarch \\
   && apt-get install -y tzdata && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN dpkg-reconfigure --frontend noninteractive tzdata
