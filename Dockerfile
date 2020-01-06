@@ -52,7 +52,8 @@ RUN apt-get install -qqy --no-install-recommends \
 
 RUN dpkg-reconfigure --frontend noninteractive tzdata
 
-RUN adduser $USER kvm
+# supposed current user is root
+# RUN adduser $USER kvm
 
 # pre-configure some ssl certs
 RUN rm -f /etc/ssl/certs/java/cacerts; \
