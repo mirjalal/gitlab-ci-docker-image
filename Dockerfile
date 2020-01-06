@@ -48,12 +48,10 @@ RUN apt-get install -qqy --no-install-recommends \
     libvirt-bin \
     ubuntu-vm-builder \
     bridge-utils \
+    cpu-checker \
   && apt-get install -y tzdata && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN dpkg-reconfigure --frontend noninteractive tzdata
-
-# supposed current user is root
-# RUN adduser $USER kvm
 
 # pre-configure some ssl certs
 RUN rm -f /etc/ssl/certs/java/cacerts; \
@@ -96,3 +94,5 @@ RUN mkdir /tmp/android-ndk && \
     mv ./android-ndk-${NDK_VERSION} ${ANDROID_NDK_HOME} && \
     cd ${ANDROID_NDK_HOME} && \
     rm -rf /tmp/android-ndk
+
+RUN kvm-ok
